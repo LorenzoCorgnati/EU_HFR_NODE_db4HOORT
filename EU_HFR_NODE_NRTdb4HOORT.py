@@ -83,19 +83,19 @@ def main(argv):
     
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!TO BE COMMENTED FOR OPERATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # Set parameter for Mysql database connection
-    sqlConfig = {
-      'user': 'HFRuserCP',
-      'password': '!_kRIVAHYH2RLpmQxz_!',
-      'host': '150.145.136.108',
-      'database': 'HFR_node_db',
-    }
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!TO BE UNCOMMENTED FOR OPERATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # sqlConfig = {
-    #   'user': 'HFRuserHOORT',
-    #   'password': '!_Wga4JNtb8tCGyX]9_!',
-    #   'host': 'localhost',
+    #   'user': 'HFRuserCP',
+    #   'password': '!_kRIVAHYH2RLpmQxz_!',
+    #   'host': '150.145.136.108',
     #   'database': 'HFR_node_db',
     # }
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!TO BE UNCOMMENTED FOR OPERATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    sqlConfig = {
+      'user': 'HFRuserHOORT',
+      'password': '!_Wga4JNtb8tCGyX]9_!',
+      'host': 'localhost',
+      'database': 'HFR_node_db',
+    }
     
     # Initialize error flag
     EHNerr = False
