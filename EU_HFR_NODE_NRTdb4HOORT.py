@@ -45,7 +45,7 @@ def main(argv):
         sys.exit(2)
         
     if not argv:
-        regDate = dt.datetime.now().strftime("%Y-%m-%d %H:00:00")
+        regDate = dt.datetime.utcnow().strftime("%Y-%m-%d %H:00:00")
             
     for opt, arg in opts:
         if opt == '-h':
@@ -61,7 +61,7 @@ def main(argv):
                 sys.exit(2)
                 
     # Set execution date
-    execDate = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    execDate = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
           
     # Create logger
     logger = logging.getLogger('EU_HFR_NODE_NRT_db4HOORT')
@@ -112,7 +112,7 @@ def main(argv):
                                    sqlConfig['database'])
     
     try:
-        # Set and execute the query for retrieving sttion_id, last_data_available and radial_delay
+        # Set and execute the query for retrieving station_id, last_data_available and radial_delay
         radialInputSelectQuery = "SELECT station_id, MAX(datetime) as last_data_available, " \
                                  "TIMESTAMPDIFF(HOUR, '" + regDate + "', MAX(datetime)) AS " \
                                  "radial_delay FROM radial_input_tb WHERE datetime <= '" \
