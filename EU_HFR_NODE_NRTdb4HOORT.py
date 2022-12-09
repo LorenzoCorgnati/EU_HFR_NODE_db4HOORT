@@ -45,7 +45,7 @@ def main(argv):
         sys.exit(2)
         
     if not argv:
-        regDate = dt.datetime.utcnow().strftime("%Y-%m-%d %H:00:00")
+        regDate = dt.datetime.utcnow().strftime("%Y-%m-%d %H:00:00")    # registration date as UTC time
             
     for opt, arg in opts:
         if opt == '-h':
@@ -60,7 +60,7 @@ def main(argv):
                 print("Incorrect date format, should be yyyy-mm-ddTHH:00:00Z (i.e. ISO8601 UTC combined date-time representation at o'clock hour')")
                 sys.exit(2)
                 
-    # Set execution date
+    # Set execution date as UTC time
     execDate = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
           
     # Create logger
@@ -112,11 +112,13 @@ def main(argv):
                                    sqlConfig['database'])
     
     try:
-        # Set and execute the query for retrieving station_id, last_data_available and radial_delay
+        # Set and execute the query for retrieving station_id, last_data_available and radial_delay                                 
         radialInputSelectQuery = "SELECT station_id, MAX(datetime) as last_data_available, " \
-                                 "TIMESTAMPDIFF(HOUR, '" + regDate + "', MAX(datetime)) AS " \
+                                 "TIMESTAMPDIFF(HOUR, MAX(datetime), '" + regDate + "') AS " \
                                  "radial_delay FROM radial_input_tb WHERE datetime <= '" \
-                                 + regDate + "' GROUP BY station_id"                   
+                                 + regDate + "' AND reception_date <= '" \
+                                 + regDate + "' GROUP BY station_id"   
+                                 
         delayData = pd.read_sql(radialInputSelectQuery, con=eng)
         # Add registration_date and creation_date to the dataframe
         if not delayData.empty:
